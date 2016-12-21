@@ -3,9 +3,7 @@
 from sys import exit
 
 import pygame
-from board import make_board, make_cells_matrix
-
-from lib.life_cicle import life_cicle
+from pygame.locals import *
 
 
 def main():
@@ -15,36 +13,36 @@ def main():
     screen = pygame.display.set_mode(screen_size, 0, 32)
     pygame.display.set_caption('Game Of Life')
 
-    # Função que abre o jogo mostrando as regras
+    # Function that opens the game and show the rules
     language = opening_game_screen_0(screen)
     opening_game_screen_1(screen, language)
     opening_game_screen_2(screen, language)
 
-    # Cria os pontos para as linhas do tabuleiro
+    # Creates the points for the board lines
     lines_x, lines_y = make_board(screen_size)
 
-    # Cria a tela para o tabuleiro
+    # Creates the canvas for the board
     screen.fill((255, 255, 255))
 
-    # Desenha as linhas no eixo x
+    # Draw the lines on the x-axis
     for points in lines_x:
         pygame.draw.aaline(screen, (211, 215, 207), points[0], points[1], 1)
 
-    # Desenhas as linhas do eixo y
+    # Draw the lines on the y-axis
     for points in lines_y:
         pygame.draw.aaline(screen, (211, 215, 207), points[0], points[1], 1)
 
-    # Desenha o tabuleiro
+    # Draw the board
     pygame.display.update()
 
-    # Cria uma matrix que representa as celulas do tabuleiro
+    # Creates a matrix that represents cells on the board
     cells_matrix = []
     make_cells_matrix(cells_matrix, lines_x, lines_y)
 
-    # Lista das celulas vivas no tabuleiro
+    # List of live cells on the board
     board_cells = []
 
-    # For init game
+    # Flag for init or end the game
     init = False
 
     # Used to manage how fast the screen updates
@@ -52,15 +50,15 @@ def main():
     speed = 1
 
     while True:
-        # Começa o loop de eventos
+        # The event loop begins
         for event in pygame.event.get():
 
-            # Evento de saida do programa
+            # Program exit event
             if event.type == QUIT:
                 pygame.quit()
                 exit()
 
-            # Para iniciar o jogo captura os cliques do mouse e cria uma celulas vivas na matrix celulas
+            # To start the game capture the mouse clicks and create a live cells in the matrix cells
             if event.type == MOUSEBUTTONDOWN:
                 i = int(event.pos[0] / 12)
                 j = int(event.pos[1] / 12)
@@ -68,7 +66,7 @@ def main():
                 board_cells.append((i, j))
                 pygame.draw.rect(screen, (255, 0, 0), [i * 12, j * 12, 10, 10])
                 pygame.display.update()
-            # Começa o jogo quando a tecla i for apertada
+            # Begin the game when press the return key
             if event.type == KEYDOWN:
                 # Se a tecla return for pressionada inicia o jogo
                 if event.key == K_RETURN:
@@ -81,20 +79,18 @@ def main():
                         speed -= 1
 
         if init:
-            # Prepara o fundo do tabuleiro
             screen.fill((255, 255, 255))
 
-            # Cria os pontos para as linhas do tabuleiro
             lines_x, lines_y = make_board(screen_size)
 
-            # Desenha as linhas no eixo x
             for points in lines_x:
                 pygame.draw.aaline(screen, (211, 215, 207), points[0], points[1], 1)
 
-            # Desenhas as linhas do eixo y
             for points in lines_y:
                 pygame.draw.aaline(screen, (211, 215, 207), points[0], points[1], 1)
+
             life_cicle(len(lines_x), len(lines_y), cells_matrix, board_cells)
+
             for i, j in board_cells:
                 pygame.draw.rect(screen, (255, 0, 0), [i * 12, j * 12, 10, 10])
 
@@ -102,19 +98,19 @@ def main():
 
             # --- Limit the frames per second
             clock.tick(speed)
+
 def opening_game_screen_0(screen):
     my_font = pygame.font.Font('fonts/roboto/Roboto-Black.ttf', 16)
     text_surface_1 = my_font.render("Select Language - Selecione a Língua", True, (255, 255, 255))
     text_surface_2 = my_font.render("For english press key 1", True, (255, 255, 255))
     text_surface_3 = my_font.render("Para português tecle 2", True, (255, 255, 255))
 
-    # Prepara o fundo da tela
     screen.fill((0, 0, 0))
 
-    # Desenha os textos na tela
-    screen.blit(text_surface_1, (40, 100))
-    screen.blit(text_surface_2, (40, 120))
-    screen.blit(text_surface_3, (40, 160))
+    # Draw text in board
+    screen.blit(text_surface_1, (160, 100))
+    screen.blit(text_surface_2, (160, 140))
+    screen.blit(text_surface_3, (160, 170))
 
     pygame.display.update()
 
@@ -149,7 +145,6 @@ def opening_game_screen_1(screen, language=2):
                                         True, (255, 255, 255))
         text_surface_10 = my_font.render("Press ENTER to see the rules.", True, (255, 255, 255))
 
-        # Prepara o fundo do tabuleiro
         screen.fill((0, 0, 0))
 
         screen.blit(text_surface_4, (40, 100))
@@ -175,7 +170,6 @@ def opening_game_screen_1(screen, language=2):
                                          True, (255, 255, 255))
         text_surface_11 = my_font.render("Tecle ENTER para ver as regras.", True, (255, 255, 255))
 
-        # Prepara o fundo do tabuleiro
         screen.fill((0, 0, 0))
 
         screen.blit(text_surface_4, (40, 100))
@@ -194,7 +188,6 @@ def opening_game_screen_1(screen, language=2):
     while flag:
         for event in pygame.event.get():
             if event.type == KEYDOWN:
-                # Se a tecla return for pressionada inicia o jogo
                 if event.key == K_RETURN:
                     flag = False
 
@@ -229,7 +222,6 @@ def opening_game_screen_2(screen, language=2):
         text_surface_25 = my_font.render('Once your initial configuration is set, press ENTER and the game starts.',
                                          True, (255, 255, 255))
 
-        # Prepara o fundo do tabuleiro
         screen.fill((0, 0, 0))
 
         screen.blit(text_surface_11, (60, 20))
@@ -278,7 +270,6 @@ def opening_game_screen_2(screen, language=2):
         text_surface_26 = my_font.render('Definida a sua configuração inicial tecle ENTER e o jogo inicia.',
                                          True, (255, 255, 255))
 
-        # Prepara o fundo do tabuleiro
         screen.fill((0, 0, 0))
 
         screen.blit(text_surface_12, (40, 20))
@@ -304,10 +295,77 @@ def opening_game_screen_2(screen, language=2):
     while flag:
         for event in pygame.event.get():
             if event.type == KEYDOWN:
-                # Se a tecla return for pressionada inicia o jogo
                 if event.key == K_RETURN:
                     flag = False
 
     return
+
+def make_board(size):
+    """Creates the lines in the x and y axis."""
+    width, height = size
+    lines_x = [[(0, y), (width, y)] for y in range(11, height, 12)]
+    lines_y = [[(x, 0), (x, height)] for x in range(11, width, 12)]
+
+    return (lines_x, lines_y)
+
+
+def make_cells_matrix(cells_matrix, lines, columns):
+    """Creates an array with all squares of the board with a value of 0.
+       Where zero means empty and 1 means occupied.
+    """
+    for i in range(0, len(lines)):
+        col = []
+        for j in range(0, len(columns)):
+            col.append(0)
+
+        cells_matrix.append(col)
+
+def life_cicle(lines, columns, cells_matrix, board_cells):
+    """Defines death or creation of cells according to the rules of the game"""
+
+    line = []
+    for i in range(lines):
+        column = []
+        for j in range(columns):
+            cells = 0
+            if i > 0 and j > 0:
+                if cells_matrix[i - 1][j - 1] == 1:
+                    cells += 1
+            if i > 0:
+                if cells_matrix[i - 1][j] == 1:
+                    cells += 1
+            if i > 0 and j < (columns - 1):
+                if cells_matrix[i - 1][j + 1] == 1:
+                    cells += 1
+            if j < (columns - 1):
+                if cells_matrix[i][j + 1] == 1:
+                    cells += 1
+            if i < (lines - 1) and j < (columns - 1):
+                if cells_matrix[i + 1][j + 1] == 1:
+                    cells += 1
+            if i < (lines - 1):
+                if cells_matrix[i + 1][j] == 1:
+                    cells += 1
+            if i < (lines - 1) and j > 0:
+                if cells_matrix[i + 1][j - 1] == 1:
+                    cells += 1
+            if j > 0:
+                if cells_matrix[i][j - 1] == 1:
+                    cells += 1
+
+            column.append(cells)
+
+        line.append(column)
+
+    for i in range(lines):
+        for j in range(columns):
+            if cells_matrix[i][j] == 1:
+                if line[i][j] < 2 or line[i][j] > 3:
+                    cells_matrix[i][j] = 0
+                    board_cells.remove((i, j))
+            if cells_matrix[i][j] == 0:
+                if line[i][j] == 3:
+                    cells_matrix[i][j] = 1
+                    board_cells.append((i, j))
 
 main()

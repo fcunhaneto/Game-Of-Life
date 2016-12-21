@@ -17,7 +17,7 @@ The rules of the game are:
 
 It is important to understand that all births and deaths occur simultaneously. Together they constitute a generation or, as we call them, an "instant" in the life story of the complete initial configuration.
 
-###################################################################################################################################
+# O Jogo da Vida
 
 O jogo da vida é um autómato celular desenvolvido pelo matemático britânico John Horton Conway.
 O jogo foi criado de modo a reproduzir, através de regras simples, as alterações e mudanças em grupos de seres vivos, tendo aplicações em diversas áreas da ciência.

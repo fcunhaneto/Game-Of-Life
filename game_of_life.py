@@ -161,7 +161,7 @@ def opening_game_screen_1(screen, language=2):
         text_surface_5 = my_font.render("John Horton Conway.", True, (255, 255, 255))
         text_surface_6 = my_font.render("O jogo foi criado de modo a reproduzir, através de regras simples, as "
                                         "alterações", True, (255, 255, 255))
-        text_surface_7 = my_font.render("e mudanças em grupos de seres vivos, tendo aplicações em diversas áreas.",
+        text_surface_7 = my_font.render("e mudanças em grupos de seres vivos, tendo aplicações em diversas áreas",
                                         True, (255, 255, 255))
         text_surface_8 = my_font.render("da ciência.", True, (255, 255, 255))
         text_surface_9 = my_font.render('O "jogo" é um jogo de zero-jogador, o que significa que a sua evolução é',
@@ -256,11 +256,10 @@ def opening_game_screen_2(screen, language=2):
         text_surface_19 = my_font.render("     estado para a próxima geração.", True, (255, 255, 255))
         text_surface_20 = my_font.render("É importante entender que todos os nascimentos e mortes ocorrem",
                                          True, (255, 255, 255))
-        text_surface_21 = my_font.render('simultaneamente. Juntos eles constituem uma geração ou, como podemos ',
+        text_surface_21 = my_font.render('simultaneamente. Juntos eles constituem uma geração ou, como podemos',
                                          True, (255, 255, 255))
-        text_surface_22 = my_font.render(
-            'chamá-los, um "instante" na história da vida completa da configuração inicial.',
-            True, (255, 255, 255))
+        text_surface_22 = my_font.render('chamá-los, um "instante" na história da vida completa da configuração inicial.',
+                                         True, (255, 255, 255))
         text_surface_23 = my_font.render('Assim que você teclar ENTER e mostrado o tabuleiro e você pode escolher as',
                                          True, (255, 255, 255))
         text_surface_24 = my_font.render('suas configurações iniciais selecionando com o mouse os quadrados no',

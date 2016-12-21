@@ -8,8 +8,11 @@ The "game" is a zero-player game, the only thing necessary is a unique user inpu
 The rules of the game are:
 
 1- Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+
 2- Any live cell with two or three live neighbours lives on to the next generation.
+
 3- Any live cell with more than three live neighbours dies, as if by overpopulation.
+
 4- Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
 It is important to understand that all births and deaths occur simultaneously. Together they constitute a generation or, as we call them, an "instant" in the life story of the complete initial configuration.
